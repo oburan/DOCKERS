@@ -6,7 +6,6 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yaml
   grafana:
@@ -15,7 +14,6 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana:/etc/grafana/provisioning/datasources
       - grafana-data:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
@@ -25,12 +23,9 @@ services:
     hostname: influxdb
     ports:
       - 8086:8086
-  telegraf:
-    image: telegraf
-    container_name: telegraf
-    hostname: telegraf
-    ports:
-      - 8125:8125
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
 volumes:
   prometheus-data:
   grafana-data:
+  influxdb-data:
