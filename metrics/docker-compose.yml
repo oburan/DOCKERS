@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   prometheus:
     image: prom/prometheus
@@ -11,6 +11,7 @@ services:
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yaml
   grafana:
     image: grafana/grafana
+    container_name: grafana
     ports:
       - 3000:3000
     volumes:
